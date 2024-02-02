@@ -129,7 +129,7 @@ while True:
                 "content": "Analyze the user mindset and the context which is relevant with the user input. Assess the user's request and categorize it as 'straightforward' or 'Complicated' if it prerequisites many steps to be fullfilled.  Rewrite the following user request for clarity: " + user_input,
             }
         ],
-        model="togethercomputer/StripedHyena-Nous-7B",
+        model="mistralai/Mixtral-8x7B-Instruct-v0.1",
         max_tokens=4096,
         top_p=0.1
     )
