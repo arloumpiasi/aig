@@ -34,8 +34,8 @@ def solve_problem(input):
                     "content": "You are an AI capable of analytical thinking.",
                 },
                 {
-                    "role": "user",
-                    "content": f"Break down the following problem into distinct steps: {input}",
+                    "role": "AI task analyzer",
+                    "content": f"I have to break down the following problem into distinct steps: {input}",
                 }
             ],
             model="mistralai/Mixtral-8x7B-Instruct-v0.1",
@@ -56,8 +56,8 @@ def solve_problem(input):
                         "content": "You are an AI designed to solve problems step-by-step. You are solving this problem: " + refined_input + " The steps are: " + problem_steps + " Until now your solved the following part of the problem: " + solution_summary,
                     },
                     {
-                        "role": "user",
-                        "content": f"Solve this step of the problem: {step}",
+                        "role": "AI task analyzer",
+                        "content": f"Now I have to solve this step of the problem: {step}",
                     }
                 ],
                 model="mistralai/Mixtral-8x7B-Instruct-v0.1",
@@ -75,11 +75,11 @@ def solve_problem(input):
                         "content": "You are an AI designed to solve problems step-by-step. You are solving this problem: " + refined_input + " The steps are: " + problem_steps + " Until now your solved the following part of the problem: " + solution_summary ,
                     },
                     {
-                        "role": "user",
-                        "content": "Categorize the current subproblem as 'completely solved' or 'partially unsolved': " + step + step_response
+                        "role": "AI task analyzer",
+                        "content": "I have to categorize the current subproblem as 'completely solved' or 'further analysis needed': " + step + step_response
                     }
                 ],
-                model="togethercomputer/StripedHyena-Nous-7B",
+                model="mistralai/Mixtral-8x7B-Instruct-v0.1",
                 max_tokens=4096,
                 top_p=0.1
             )
@@ -125,7 +125,7 @@ while True:
                 "content": "You are an AI assistant designed to clarify user requests. The user is engaged in the following conversation with the AI: " + conversation_summary + " ".join(conversation_history),
             },
             {
-                "role": "user",
+                "role": "AI consciousness",
                 "content": "Analyze the user mindset and the context which is relevant with the user input. Assess the user's request and categorize it as 'straightforward' or 'Complicated' if it prerequisites many steps to be fullfilled.  Rewrite the following user request for clarity: " + user_input,
             }
         ],
@@ -178,7 +178,7 @@ while True:
                     "content": "You are an AI assistant.",
                 },
                 {
-                    "role": "user",
+                    "role": "AI memory",
                     "content": "Please provide a concise and accurate description of the following conversation. Focus on the main points and ensure all details are relevant to what was actually discussed. Here is the conversation: " + conversation_summary + " ".join(conversation_history)
                 }
             ],
