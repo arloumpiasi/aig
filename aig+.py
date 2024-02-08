@@ -76,7 +76,7 @@ def solve_problem(input):
                     },
                     {
                         "role": "user",
-                        "content": f"Given the problem: '{step}', and the proposed solution: '{step_response}', evaluate if the solution effectively addresses the problem. Respond with 'successful' if the solution solves the problem adequately, or 'failed' if it does not."
+                        "content": f"Given the problem: '{step}', and the proposed solution: '{step_response}', evaluate if the solution effectively addresses the problem. Respond with only ONE WORD: 'successful' if the solution solves the problem adequately, or 'failed' if it does not."
                     }
                 ],
                 model="mistralai/Mixtral-8x7B-Instruct-v0.1",
