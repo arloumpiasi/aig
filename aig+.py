@@ -68,7 +68,7 @@ def solve_problem(input):
             print("Response:", step_response)
 
             # Use the AI to check if the subproblem successfully solved
-            solution_completion = client.chat.completions.create(
+            solution_correct = client.chat.completions.create(
                 messages=[
                     {
                         "role": "system",
@@ -83,11 +83,33 @@ def solve_problem(input):
                 max_tokens=4096,
                 top_p=0.1
             )
+            step_solution = solution_correct.choices[0].message.content
+            print("\nIs this step solved?:")
+            print("Review: ", step_solution)
+            print("\nend of review")
+            #repeat TODO!
+
+            # Use the AI to check if the subproblem requires further analysis
+            solution_completion = client.chat.completions.create(
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "You are an AI assistant designed to review problem solutions step-by-step. You are solving this problem: " + refined_input + " The steps are: " + problem_steps + " Until now your solved the following part of the problem: " + solution_summary
+                    },
+                    {
+                        "role": "user",
+                        "content": "Considering the solutions developed so far and the remaining aspects of the problem, assess the completeness of our approach to each subproblem. Determine whether each part is completely solved or if further detail and analysis are necessary. Categorize the solution to the current subproblem as 'perfect' or 'incomplete': " + step + step_response
+                    }
+                ],
+                model="mistralai/Mixtral-8x7B-Instruct-v0.1",
+                max_tokens=4096,
+                top_p=0.1
+            )
             step_solution = solution_completion.choices[0].message.content
             print("\nIs this step solved?:")
             print("Review: ", step_solution)
             print("\nend of review")
-
+            
             # Use the AI to summarize the solution
             summary_completion = client.chat.completions.create(
                 messages=[
@@ -105,7 +127,7 @@ def solve_problem(input):
                 top_p=0.1
             )
             solution_summary = summary_completion.choices[0].message.content
-            if not "Successful" in step_solution.lower() and not "successful" in step_solution.lower():
+            if not "Perfect" in step_solution.lower() and not "perfect" in step_solution.lower():
                 solve_problem(step)
             
 
