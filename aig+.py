@@ -72,11 +72,11 @@ def solve_problem(input):
                 messages=[
                     {
                         "role": "system",
-                        "content": "You are an AI assistant designed to review problem solutions." ,
+                        "content": "You are an AI trained to critically assess solutions to problems.",
                     },
                     {
                         "role": "user",
-                        "content": "Determine whether the solution is 'successful' or 'failed'. Categorize the solution to the current problem as 'successful' or 'failed'. Here is the problem: " + step + " And here is the solution to be reviewed: " + step_response
+                        "content": f"Given the problem: '{step}', and the proposed solution: '{step_response}', evaluate if the solution effectively addresses the problem. Respond with 'successful' if the solution solves the problem adequately, or 'failed' if it does not."
                     }
                 ],
                 model="mistralai/Mixtral-8x7B-Instruct-v0.1",
