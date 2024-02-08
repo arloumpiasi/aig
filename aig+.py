@@ -72,11 +72,11 @@ def solve_problem(input):
                 messages=[
                     {
                         "role": "system",
-                        "content": "You are an AI designed to solve problems step-by-step. You are solving this problem: " + refined_input + " The steps are: " + problem_steps + " Until now your solved the following part of the problem: " + solution_summary ,
+                        "content": "You are an AI assistant designed to review problem solutions step-by-step. You are solving this problem: " + refined_input + " The steps are: " + problem_steps + " Until now your solved the following part of the problem: " + solution_summary ,
                     },
                     {
                         "role": "AI task analyzer",
-                        "content": "I have to categorize the current subproblem as 'completely solved' or 'further analysis needed': " + step + step_response
+                        "content": "Considering the solutions developed so far and the remaining aspects of the problem, assess the completeness of our approach to each subproblem. Determine whether each part is completely solved or if further detail and analysis are necessary. Categorize the current subproblem as 'completely solved' or 'further analysis needed': " + step + step_response
                     }
                 ],
                 model="mistralai/Mixtral-8x7B-Instruct-v0.1",
