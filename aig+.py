@@ -34,7 +34,7 @@ def solve_problem(input):
                     "content": "You are an AI capable of analytical thinking.",
                 },
                 {
-                    "role": "AI task analyzer",
+                    "role": "user",
                     "content": f"I have to break down the following problem into distinct steps: {input}",
                 }
             ],
