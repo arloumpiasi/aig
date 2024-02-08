@@ -83,7 +83,7 @@ def solve_problem(input):
                 max_tokens=4096,
                 top_p=0.1
             )
-            step_solution = step_completion.choices[0].message.content
+            step_solution = solution_completion.choices[0].message.content
             print("\nIs this step solved?:")
             print("Review: ", step_solution)
             print("\nend of review")
