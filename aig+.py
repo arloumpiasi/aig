@@ -76,7 +76,7 @@ def solve_problem(input):
                     },
                     {
                         "role": "user",
-                        "content": "Assess the completeness of our approach to this subproblem. Determine whether the solution is 'successful' or 'failed' and therefore further detail and analysis are necessary. Categorize the solution to the current subproblem as 'successful' or 'failed'. Here is the problem: " + step + " And here is the solution to be reviewed: " + step_response
+                        "content": "Determine whether the solution is 'successful' or 'failed'. Categorize the solution to the current problem as 'successful' or 'failed'. Here is the problem: " + step + " And here is the solution to be reviewed: " + step_response
                     }
                 ],
                 model="mistralai/Mixtral-8x7B-Instruct-v0.1",
@@ -85,7 +85,8 @@ def solve_problem(input):
             )
             step_solution = step_completion.choices[0].message.content
             print("\nIs this step solved?:")
-            print("Review:", step_solution)
+            print("Review: ", step_solution)
+            print("\nend of review")
 
             # Use the AI to summarize the solution
             summary_completion = client.chat.completions.create(
