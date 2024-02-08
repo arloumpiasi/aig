@@ -125,7 +125,7 @@ while True:
                 "content": "You are an AI assistant designed to clarify user requests. The user is engaged in the following conversation with the AI: " + conversation_summary + " ".join(conversation_history),
             },
             {
-                "role": "AI consciousness",
+                "role": "user",
                 "content": "Analyze the user mindset and the context which is relevant with the user input. Assess the user's request and categorize it as 'straightforward' or 'Complicated' if it prerequisites many steps to be fullfilled.  Rewrite the following user request for clarity: " + user_input,
             }
         ],
