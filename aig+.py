@@ -85,7 +85,7 @@ def solve_problem(input):
             )
             step_solution = step_completion.choices[0].message.content
             print("\nIs this step solved?:")
-            print("Response:", step_solution)
+            print("Review:", step_solution)
 
             # Use the AI to summarize the solution
             summary_completion = client.chat.completions.create(
