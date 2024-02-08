@@ -76,7 +76,7 @@ def solve_problem(input):
                     },
                     {
                         "role": "user",
-                        "content": "Considering the solutions developed so far and the remaining aspects of the problem, assess the completeness of our approach to each subproblem. Determine whether each part is completely solved or if further detail and analysis are necessary. Categorize the current subproblem as 'completely solved' or 'further analysis needed': " + step + step_response
+                        "content": "Considering the solutions developed so far and the remaining aspects of the problem, assess the completeness of our approach to each subproblem. Determine whether each solution is 'successful' or 'failed' and therefore further detail and analysis are necessary. Categorize the solution to the current subproblem as 'successful' or 'failed': " + step + "solution: " + step_response
                     }
                 ],
                 model="mistralai/Mixtral-8x7B-Instruct-v0.1",
@@ -104,7 +104,7 @@ def solve_problem(input):
                 top_p=0.1
             )
             solution_summary = summary_completion.choices[0].message.content
-            if not "Completely solved" in step_solution.lower() and not "completely solved" in step_solution.lower():
+            if not "Successful" in step_solution.lower() and not "successful" in step_solution.lower():
                 solve_problem(step)
             
 
