@@ -72,11 +72,11 @@ def solve_problem(input):
                 messages=[
                     {
                         "role": "system",
-                        "content": "You are an AI assistant designed to review problem solutions step-by-step. You are solving this problem: " + refined_input + " The steps are: " + problem_steps + " Until now your solved the following part of the problem: " + solution_summary ,
+                        "content": "You are an AI assistant designed to review problem solutions." ,
                     },
                     {
                         "role": "user",
-                        "content": "Considering the solutions developed so far and the remaining aspects of the problem, assess the completeness of our approach to each subproblem. Determine whether each solution is 'successful' or 'failed' and therefore further detail and analysis are necessary. Categorize the solution to the current subproblem as 'successful' or 'failed': " + step + "solution: " + step_response
+                        "content": "Assess the completeness of our approach to this subproblem. Determine whether the solution is 'successful' or 'failed' and therefore further detail and analysis are necessary. Categorize the solution to the current subproblem as 'successful' or 'failed'. Here is the problem: " + step + " And here is the solution to be reviewed: " + step_response
                     }
                 ],
                 model="mistralai/Mixtral-8x7B-Instruct-v0.1",
@@ -126,7 +126,7 @@ while True:
             },
             {
                 "role": "user",
-                "content": "Analyze the user mindset and the context which is relevant with the user input. Assess the user's request and categorize it as 'straightforward' or 'Complicated' if it prerequisites many steps to be fullfilled.  Rewrite the following user request for clarity: " + user_input,
+                "content": "Analyze the user mindset and the context which is relevant with the user input. Assess the user's request and categorize it as 'straightforward' or 'Complicated' if it prerequisites many steps to be fullfilled.  Clarify user's intentions. If complicated, analyze it. Here is user's input: " + user_input,
             }
         ],
         model="mistralai/Mixtral-8x7B-Instruct-v0.1",
@@ -142,6 +142,8 @@ while True:
     print("\n--- Question rewrite ---")
     print(refined_input)
 
+    refined_input = user_input + refined_input
+    
     if assessment == 'complex':
         # Phase 1: Problem Analysis
         # Analyze the problem and break it down into steps
