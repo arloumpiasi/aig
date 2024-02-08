@@ -56,7 +56,7 @@ def solve_problem(input):
                         "content": "You are an AI designed to solve problems step-by-step. You are solving this problem: " + refined_input + " The steps are: " + problem_steps + " Until now your solved the following part of the problem: " + solution_summary,
                     },
                     {
-                        "role": "AI task analyzer",
+                        "role": "user",
                         "content": f"Now I have to solve this step of the problem: {step}",
                     }
                 ],
@@ -75,7 +75,7 @@ def solve_problem(input):
                         "content": "You are an AI assistant designed to review problem solutions step-by-step. You are solving this problem: " + refined_input + " The steps are: " + problem_steps + " Until now your solved the following part of the problem: " + solution_summary ,
                     },
                     {
-                        "role": "AI task analyzer",
+                        "role": "user",
                         "content": "Considering the solutions developed so far and the remaining aspects of the problem, assess the completeness of our approach to each subproblem. Determine whether each part is completely solved or if further detail and analysis are necessary. Categorize the current subproblem as 'completely solved' or 'further analysis needed': " + step + step_response
                     }
                 ],
@@ -178,7 +178,7 @@ while True:
                     "content": "You are an AI assistant.",
                 },
                 {
-                    "role": "AI memory",
+                    "role": "user",
                     "content": "Please provide a concise and accurate description of the following conversation. Focus on the main points and ensure all details are relevant to what was actually discussed. Here is the conversation: " + conversation_summary + " ".join(conversation_history)
                 }
             ],
