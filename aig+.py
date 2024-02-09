@@ -25,8 +25,8 @@ def evaluate_need_for_user_feedback(step, step_response):
     print("feedback analysis: " + feedback_analysis)
     feedback_needed = feedback_evaluation.choices[0].message.content.strip().lower()
     if feedback_needed:
-        more_user_input = input("User: ")
-    step_response = step_response + more_user_input
+        more_user_input = input("\nUser: ")
+    step_response = step_response + "\n user: \n" + more_user_input
 
 
 def extract_steps(text):
@@ -115,7 +115,8 @@ def solve_problem(input):
             print("Review: ", step_solution)
             print("\nend of review")
             #repeat TODO!
-
+            step_response = step_response + step_solution
+    
             # Use the AI to check if the subproblem requires further analysis
             solution_completion = client.chat.completions.create(
                 messages=[
@@ -136,6 +137,8 @@ def solve_problem(input):
             print("\nIs this step solved?:")
             print("Review: ", step_solution)
             print("\nend of review")
+
+            step_response = step_response + step_solution
             
             # Use the AI to summarize the solution
             summary_completion = client.chat.completions.create(
@@ -148,7 +151,7 @@ def solve_problem(input):
                         "role": "user",
                         "content": "Please provide a concise and accurate description of the following solution. Focus on the main points and ensure all details are relevant. Here is the solution: " + solution_summary + step_response
                     }
-                ],
+                ], 
                 model="togethercomputer/StripedHyena-Nous-7B",
                 max_tokens=4096,
                 top_p=0.1
