@@ -78,7 +78,7 @@ def solve_problem(input):
                 messages=[
                     {
                         "role": "system",
-                        "content": "You are an AI designed to solve problems step-by-step. You are also an AI designed to operate independently, minimizing the need for user input. You are solving this problem: " + refined_input + " The steps are: " + problem_steps + " Until now your solved the following part of the problem: " + solution_summary,
+                        "content": "You are an AI designed to work step-by-step. Deliver the simplest aapossible solution. You are also an AI designed to operate independently, minimizing the need for user input. You are working on this task: " + refined_input + " The steps are: " + problem_steps + " Until now your solved the following part of the problem: " + solution_summary,
                     },
                     {
                         "role": "user",
@@ -115,7 +115,7 @@ def solve_problem(input):
             print("Review: ", step_solution)
             print("\nend of review")
             #repeat TODO!
-            step_response = step_response + step_solution
+            #step_response = step_response + step_solution
     
             # Use the AI to check if the subproblem requires further analysis
             solution_completion = client.chat.completions.create(
@@ -145,7 +145,7 @@ def solve_problem(input):
                 messages=[
                     {
                         "role": "system",
-                        "content": "You are an AI designed to solve problems step-by-step. You are solving this problem: " + refined_input + " The steps are: " + problem_steps + " Until now your solved the following part of the problem: " + solution_summary,
+                        "content": "You are an AI designed to work step-by-step. You are working on this task: " + refined_input + " The steps are: " + problem_steps + " Until now your solved the following part of the problem: " + solution_summary,
                     },
                     {
                         "role": "user",
