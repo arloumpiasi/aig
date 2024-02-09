@@ -4,6 +4,31 @@ import os
 import random
 import re
 
+# Function to evaluate if user feedback is needed
+def evaluate_need_for_user_feedback(step, step_response):
+    feedback_evaluation = client.chat.completions.create(
+        messages=[
+            {
+                "role": "system",
+                "content": "You are an AI designed to operate independently, minimizing the need for user input. Evaluate the completeness of the information provided for this step.",
+            },
+            {
+                "role": "user",
+                "content": f"Given the problem step: '{step}' and the proposed solution: '{step_response}', determine if this can be fully resolved autonomously or if specific user feedback is required. Provide 'autonomous completion possible' if no further user input is needed, or 'user feedback required' for areas needing clarification or decision."
+            }
+        ],
+        model="your_model_identifier",
+        max_tokens=512,
+        top_p=0.1
+    )
+    feedback_analysis = feedback_evaluation.choices[0].message.content
+    print("feedback analysis: " + feedback_analysis)
+    feedback_needed = feedback_evaluation.choices[0].message.content.strip().lower()
+    if feedback_needed
+        more_user_input = input("User: ")
+    step_response = step_response + more_user_input
+
+
 def extract_steps(text):
     # Regex pattern to match lines starting with a number or a letter followed by a period
     pattern = r'^[0-9A-Za-z]+\..+$'
@@ -31,7 +56,7 @@ def solve_problem(input):
             messages=[
                 {
                     "role": "system",
-                    "content": "You are an AI capable of analytical thinking.",
+                    "content": "You are an AI designed to operate independently, minimizing the need for user input. You are also an AI capable of analytical thinking.",
                 },
                 {
                     "role": "user",
@@ -53,7 +78,7 @@ def solve_problem(input):
                 messages=[
                     {
                         "role": "system",
-                        "content": "You are an AI designed to solve problems step-by-step. You are solving this problem: " + refined_input + " The steps are: " + problem_steps + " Until now your solved the following part of the problem: " + solution_summary,
+                        "content": "You are an AI designed to solve problems step-by-step. You are also an AI designed to operate independently, minimizing the need for user input. You are solving this problem: " + refined_input + " The steps are: " + problem_steps + " Until now your solved the following part of the problem: " + solution_summary,
                     },
                     {
                         "role": "user",
@@ -67,6 +92,8 @@ def solve_problem(input):
             print("\nStep:", step)
             print("Response:", step_response)
 
+            evaluate_need_for_user_feedback(step, step_response)
+            
             # Use the AI to check if the subproblem successfully solved
             solution_correct = client.chat.completions.create(
                 messages=[
@@ -98,7 +125,7 @@ def solve_problem(input):
                     },
                     {
                         "role": "user",
-                        "content": "Considering the solutions developed so far and the remaining aspects of the problem, assess the completeness of our approach to each subproblem. Determine whether each part is completely solved or if further detail and analysis are necessary. Categorize the solution to the current subproblem as 'perfect' or 'incomplete': " + step + step_response
+                        "content": "Examine the solution outlined for this substep. Has the described work effectively met the criteria or objectives specified? Assess whether the output aligns with what was expected for this stage of the solution. Indicate 'work delivered' if the substep's objectives are fully achieved, or 'additional work needed' if the outcome does not fully address the expectations set out for this substep. Considering the solutions developed so far and the remaining aspects of the problem, assess the completeness of our approach to each subproblem. Determine whether each part is completely solved or if further detail and analysis are necessary. Categorize the solution to the current subproblem as 'perfect' or 'incomplete': " + step + step_response
                     }
                 ],
                 model="mistralai/Mixtral-8x7B-Instruct-v0.1",
