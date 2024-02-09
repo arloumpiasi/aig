@@ -17,7 +17,7 @@ def evaluate_need_for_user_feedback(step, step_response):
                 "content": f"Given the problem step: '{step}' and the proposed solution: '{step_response}', determine if this can be fully resolved autonomously or if specific user feedback is required. Provide 'autonomous completion possible' if no further user input is needed, or 'user feedback required' for areas needing clarification or decision."
             }
         ],
-        model="your_model_identifier",
+        model="mistralai/Mixtral-8x7B-Instruct-v0.1",
         max_tokens=512,
         top_p=0.1
     )
