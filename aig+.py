@@ -125,7 +125,7 @@ def solve_problem(input):
                     },
                     {
                         "role": "user",
-                        "content": "Examine the solution outlined for this substep. Has the described work effectively met the criteria or objectives specified? Assess whether the output aligns with what was expected for this stage of the solution. Indicate 'work delivered' if the substep's objectives are fully achieved, or 'additional work needed' if the outcome does not fully address the expectations set out for this substep. Considering the solutions developed so far and the remaining aspects of the problem, assess the completeness of our approach to each subproblem. Determine whether each part is completely solved or if further detail and analysis are necessary. Categorize the solution to the current subproblem as 'perfect' or 'incomplete': " + step + step_response
+                        "content": "Review the proposed solution for this subproblem, focusing on tangible outcomes and the actual completion of tasks as described. Assess whether the work has been practically implemented and meets the specified requirements. Consider if the solution not only sounds comprehensive in theory but also has been brought into action, resulting in concrete deliverables. Respond with 'implementation confirmed' if the solution has been actualized and the deliverables are in place, or 'implementation pending' if the solution remains theoretical and the practical work is yet to be completed. Considering the solutions developed so far and the remaining aspects of the problem, assess the completeness of our approach to each subproblem. Determine whether each part is completely solved or if further detail and analysis are necessary: " + step + step_response
                     }
                 ],
                 model="mistralai/Mixtral-8x7B-Instruct-v0.1",
@@ -154,7 +154,7 @@ def solve_problem(input):
                 top_p=0.1
             )
             solution_summary = summary_completion.choices[0].message.content
-            if not "Perfect" in step_solution.lower() and not "perfect" in step_solution.lower():
+            if "implementation pending" in step_solution.lower() or "Implementation pending" in step_solution.lower():
                 solve_problem(step)
             
 
