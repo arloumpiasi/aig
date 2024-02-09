@@ -24,7 +24,7 @@ def evaluate_need_for_user_feedback(step, step_response):
     feedback_analysis = feedback_evaluation.choices[0].message.content
     print("feedback analysis: " + feedback_analysis)
     feedback_needed = feedback_evaluation.choices[0].message.content.strip().lower()
-    if feedback_needed
+    if feedback_needed:
         more_user_input = input("User: ")
     step_response = step_response + more_user_input
 
