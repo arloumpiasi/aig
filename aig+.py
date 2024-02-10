@@ -78,7 +78,7 @@ def solve_problem(input):
                 messages=[
                     {
                         "role": "system",
-                        "content": "You are an AI designed to work step-by-step. Deliver the simplest aapossible solution. You are also an AI designed to operate independently, minimizing the need for user input. You are working on this task: " + refined_input + " The steps are: " + problem_steps + " Until now your solved the following part of the problem: " + solution_summary,
+                        "content": "You are an AI designed to work step-by-step. You are also an AI designed to operate independently, minimizing the need for user input. Therefore deliver the simplest possible solution, something that you are able to do in one or multiple steps. You are working on this task: " + refined_input + " The steps are: " + problem_steps + " Until now your solved the following part of the problem: " + solution_summary,
                     },
                     {
                         "role": "user",
