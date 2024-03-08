@@ -38,7 +38,7 @@ def extract_steps(text):
 
     return steps
 
-client = OpenAI(api_key="2d1b62ac8b4d401f7daaa3d5f101d92cf144da09d808008c9daf148598d4507a",
+client = OpenAI(api_key="EDIT_AND WRITE_HERE_YOUR_API_KEY",
   base_url='https://api.together.xyz',
 )
 
